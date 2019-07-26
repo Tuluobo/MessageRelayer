@@ -18,8 +18,8 @@
     <RelativeLayout
         android:id="@+id/layout_rule_mobile"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="15dp"
+        android:layout_height="52dp"
+        android:padding="12dp"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
     <RelativeLayout
         android:id="@+id/layout_rule_keyword"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="15dp"
+        android:layout_height="52dp"
+        android:padding="12dp"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
@@ -73,8 +73,8 @@
     <RelativeLayout
         android:id="@+id/layout_rule_prefix"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="15dp"
+        android:layout_height="52dp"
+        android:padding="12dp"
         android:background="@android:color/white">
 
         <TextView
@@ -104,8 +104,8 @@
     <RelativeLayout
         android:id="@+id/layout_rule_suffix"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:padding="15dp"
+        android:layout_height="52dp"
+        android:padding="12dp"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
