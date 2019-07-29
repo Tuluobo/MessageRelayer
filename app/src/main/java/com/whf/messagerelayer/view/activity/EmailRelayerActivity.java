@@ -2,9 +2,6 @@ package com.whf.messagerelayer.view.activity;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.data.Constants;
@@ -101,24 +102,24 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     }
 
     private void initView() {
-        mEmailSwitch = (Switch) findViewById(R.id.switch_email);
-        mSslSwitch = (Switch) findViewById(R.id.switch_ssl);
+        mEmailSwitch = findViewById(R.id.switch_email);
+        mSslSwitch = findViewById(R.id.switch_ssl);
 
-        mLayoutServicer = (RelativeLayout) findViewById(R.id.layout_servicer);
-        mLayoutAccount = (RelativeLayout) findViewById(R.id.layout_account);
-        mLayoutAddress = (RelativeLayout) findViewById(R.id.layout_address);
-        mLayoutPort = (RelativeLayout) findViewById(R.id.layout_port);
-        mLayoutToAccount = (RelativeLayout) findViewById(R.id.layout_to_account);
-        mLayoutSenderName = (RelativeLayout) findViewById(R.id.layout_sender_name);
-        mLayoutSubject = (RelativeLayout) findViewById(R.id.layout_subject);
+        mLayoutServicer = findViewById(R.id.layout_servicer);
+        mLayoutAccount = findViewById(R.id.layout_account);
+        mLayoutAddress = findViewById(R.id.layout_address);
+        mLayoutPort = findViewById(R.id.layout_port);
+        mLayoutToAccount = findViewById(R.id.layout_to_account);
+        mLayoutSenderName = findViewById(R.id.layout_sender_name);
+        mLayoutSubject = findViewById(R.id.layout_subject);
 
-        mTextServicer = (TextView) findViewById(R.id.text_servicer);
-        mTextAccount = (TextView) findViewById(R.id.text_account);
-        mTextAddress = (TextView) findViewById(R.id.text_address);
-        mTextPort = (TextView) findViewById(R.id.text_port);
-        mTextToAccount = (TextView) findViewById(R.id.text_to_account);
-        mTextSenderName = (TextView) findViewById(R.id.text_sender_name);
-        mTextSubject = (TextView) findViewById(R.id.text_subject);
+        mTextServicer = findViewById(R.id.text_servicer);
+        mTextAccount = findViewById(R.id.text_account);
+        mTextAddress = findViewById(R.id.text_address);
+        mTextPort = findViewById(R.id.text_port);
+        mTextToAccount = findViewById(R.id.text_to_account);
+        mTextSenderName = findViewById(R.id.text_sender_name);
+        mTextSubject = findViewById(R.id.text_subject);
 
         mAddressLine = findViewById(R.id.line_address);
         mPortLine = findViewById(R.id.line_port);
@@ -179,8 +180,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     private void showSubjectDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textViewTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textViewTitle.setText("请输入邮件主题");
         editText.setText(mSharedPreferenceUtil.getEmailSubject());
@@ -206,8 +207,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     private void showSenderNameDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textViewTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textViewTitle.setText("请输入发送方名称");
         editText.setText(mSharedPreferenceUtil.getEmailSenderName());
@@ -284,12 +285,12 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     }
 
     private View initServicerDialogView(View.OnClickListener onClickListener, View view) {
-        TextView emailQq = (TextView) view.findViewById(R.id.text_qq_email);
-        TextView emaill26 = (TextView) view.findViewById(R.id.text_126_email);
-        TextView email163 = (TextView) view.findViewById(R.id.text_163_email);
-        TextView emailOutlook = (TextView) view.findViewById(R.id.text_outlook_email);
-        TextView emailGmail = (TextView) view.findViewById(R.id.text_gmail_email);
-        TextView emailOther = (TextView) view.findViewById(R.id.text_other_email);
+        TextView emailQq = view.findViewById(R.id.text_qq_email);
+        TextView emaill26 = view.findViewById(R.id.text_126_email);
+        TextView email163 = view.findViewById(R.id.text_163_email);
+        TextView emailOutlook = view.findViewById(R.id.text_outlook_email);
+        TextView emailGmail = view.findViewById(R.id.text_gmail_email);
+        TextView emailOther = view.findViewById(R.id.text_other_email);
 
         email163.setOnClickListener(onClickListener);
         emailGmail.setOnClickListener(onClickListener);
@@ -305,8 +306,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_email_account, null, false);
         builder.setView(view);
 
-        final EditText textAccount = (EditText) view.findViewById(R.id.editText_account);
-        final EditText textPassword = (EditText) view.findViewById(R.id.editText_password);
+        final EditText textAccount = view.findViewById(R.id.editText_account);
+        final EditText textPassword = view.findViewById(R.id.editText_password);
 
         String text = mTextAccount.getText().toString();
         if (!text.equals("点击设置")) {
@@ -335,8 +336,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     private void showAddressDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textViewTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textViewTitle.setText("请输入SMTP服务器地址");
         String text = mTextAddress.getText().toString();
@@ -363,8 +364,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     private void showPortDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textViewTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textViewTitle.setText("请输入SMTP端口号");
         String text = mTextPort.getText().toString();
@@ -391,8 +392,8 @@ public class EmailRelayerActivity extends AppCompatActivity implements
     private void showToAccountDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textViewTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textViewTitle.setText("请输入目标邮箱账号");
         String text = mTextToAccount.getText().toString();
@@ -402,7 +403,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
 
         builder.setView(view);
         final AlertDialog.Builder progressBuilder = new AlertDialog.Builder(this);
-        progressBuilder.setView(LayoutInflater.from(this).inflate(R.layout.dialog_progress,null,false));
+        progressBuilder.setView(LayoutInflater.from(this).inflate(R.layout.dialog_progress, null, false));
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override

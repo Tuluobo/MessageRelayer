@@ -2,9 +2,6 @@ package com.whf.messagerelayer.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,6 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.data.Constants;
@@ -41,14 +42,14 @@ public class RuleActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        mMoblieRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_mobile);
-        mKeywordRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_keyword);
+        mMoblieRuleLayout = findViewById(R.id.layout_rule_mobile);
+        mKeywordRuleLayout = findViewById(R.id.layout_rule_keyword);
 
-        mPrefixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_prefix);
-        mSuffixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_suffix);
+        mPrefixRuleLayout = findViewById(R.id.layout_rule_prefix);
+        mSuffixRuleLayout = findViewById(R.id.layout_rule_suffix);
 
-        mPrefixText = (TextView) findViewById(R.id.text_prefix);
-        mSuffixText = (TextView) findViewById(R.id.text_suffix);
+        mPrefixText = findViewById(R.id.text_prefix);
+        mSuffixText = findViewById(R.id.text_suffix);
     }
 
     private void initListener() {
@@ -99,8 +100,8 @@ public class RuleActivity extends AppCompatActivity implements View.OnClickListe
     private void showEditDialog(String title, final String key) {
         AlertDialog.Builder buileder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        TextView textTitle = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        TextView textTitle = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textTitle.setText(title);
         buileder.setView(view);

@@ -7,8 +7,9 @@ package com.whf.messagerelayer.utils;
 public class SmsRelayerManager {
     /**
      * 发送短信至目标手机号
+     *
      * @param dataManager
-     * @param content      短信内容
+     * @param content     短信内容
      */
     public static void relaySms(SharedPreferenceUtil dataManager, String content) {
         String objectMobile = dataManager.getObjectMobile();

@@ -3,12 +3,7 @@ package com.whf.messagerelayer.view.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +12,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.whf.messagerelayer.R;
+import com.whf.messagerelayer.data.Constants;
+import com.whf.messagerelayer.data.DataBaseManager;
+import com.whf.messagerelayer.data.bean.Contact;
+import com.whf.messagerelayer.utils.ContactManager;
 import com.whf.messagerelayer.view.adapter.ContactListAdapter;
 import com.whf.messagerelayer.view.adapter.decoration.ContactDecoration;
-import com.whf.messagerelayer.data.bean.Contact;
-import com.whf.messagerelayer.data.Constants;
-import com.whf.messagerelayer.utils.ContactManager;
-import com.whf.messagerelayer.data.DataBaseManager;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,7 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
         initActionbar();
 
-        mContactRecycler = (RecyclerView) findViewById(R.id.list_contact);
+        mContactRecycler = findViewById(R.id.list_contact);
         initRecyclerView();
     }
 
@@ -75,8 +76,8 @@ public class ContactListActivity extends AppCompatActivity {
     private void showFindDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
-        TextView textView = (TextView) view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
+        TextView textView = view.findViewById(R.id.dialog_title);
         textView.setText("请输入要查找的联系人全名");
 
         builder.setView(view);
@@ -91,7 +92,7 @@ public class ContactListActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = editText.getText().toString();
-                if (name.length() != 0){
+                if (name.length() != 0) {
                     findName(name);
                 }
             }
@@ -105,13 +106,13 @@ public class ContactListActivity extends AppCompatActivity {
      */
     private void findName(String name) {
         int length = mContactList.size();
-        for (int i=0;i<length;i++){
+        for (int i = 0; i < length; i++) {
             if (mContactList.get(i).getContactName().equals(name)) {
                 mContactRecycler.scrollToPosition(i);
-                Toast.makeText(this,"找到啦~~",Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "找到啦~~", Toast.LENGTH_LONG).show();
                 break;
-            }else if(i==length-1){
-                Toast.makeText(this,"没找到~~",Toast.LENGTH_LONG).show();
+            } else if (i == length - 1) {
+                Toast.makeText(this, "没找到~~", Toast.LENGTH_LONG).show();
             }
         }
     }

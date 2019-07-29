@@ -35,32 +35,32 @@ public class EmailRelayerManager {
     public static int relayEmail(SharedPreferenceUtil dataManager, String content) {
         Properties props = new Properties();
         User user = getSenderUser(dataManager);
-        EmailMessage  emailMessage = creatEmailMessage(content,dataManager);
-        setHost(dataManager,props);
+        EmailMessage emailMessage = creatEmailMessage(content, dataManager);
+        setHost(dataManager, props);
 
         //是否开启SSL
-        if (dataManager.getEmailSsl()){
-            if(dataManager.getEmailServicer()== Constants.EMAIL_SERVICER_OTHER){
-                setSslMode(props,PORT_SSL);
-            }else{
+        if (dataManager.getEmailSsl()) {
+            if (dataManager.getEmailServicer() == Constants.EMAIL_SERVICER_OTHER) {
+                setSslMode(props, PORT_SSL);
+            } else {
                 String port = dataManager.getEmailPort();
-                if(port!=null){
-                    setSslMode(props,port);
+                if (port != null) {
+                    setSslMode(props, port);
                 }
             }
         }
 
-        setSenderToPro(props,user);
+        setSenderToPro(props, user);
         props.put("mail.smtp.auth", true);//如果不设置，则报553错误
         props.put("mail.transport.protocol", "smtp");
 
         //getDefaultInstace得到的始终是该方法初次创建的缺省的对象，getInstace每次获取新对象
         Session session = Session.getInstance(props
-                ,new SmtpAuthenticator(user));
+                , new SmtpAuthenticator(user));
         session.setDebug(true);
 
         try {
-            MimeMessage message = creatMessage(session,emailMessage);
+            MimeMessage message = creatMessage(session, emailMessage);
             Transport.send(message);
             return CODE_SUCCESS;
         } catch (MessagingException e) {
@@ -80,12 +80,13 @@ public class EmailRelayerManager {
 
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(emailMessage.getSenderAccount()
-                ,emailMessage.getSenderName(),"UTF-8"));//发件人
-        message.setRecipients(MimeMessage.RecipientType.TO,emailMessage.getReceiverAccount());//收件人
+                , emailMessage.getSenderName(), "UTF-8"));//发件人
+        message.setRecipients(MimeMessage.RecipientType.TO, emailMessage.getReceiverAccount());//收件人
         message.setSubject(emailMessage.getSubject());//主题
-        message.setContent(emailMessage.getContent(),"text/html;charset=UTF-8");
+        message.setContent(emailMessage.getContent(), "text/html;charset=UTF-8");
         return message;
     }
+
     /**
      * SMTP 服务器的端口 (非 SSL 连接的端口一般默认为 25, 可以不添加, 如果
      * 开启了 SSL 连接,需要改为对应邮箱的 SMTP 服务器的端口, 具体可查看对应
@@ -101,16 +102,16 @@ public class EmailRelayerManager {
     /**
      * 从本地数据获取发送方账号和密码
      */
-    private static User getSenderUser(SharedPreferenceUtil dataManager){
-        return new User(dataManager.getEmailAccount(),dataManager.getEmailPassword());
+    private static User getSenderUser(SharedPreferenceUtil dataManager) {
+        return new User(dataManager.getEmailAccount(), dataManager.getEmailPassword());
     }
 
     /**
      * 将发送发的账号和密码设置给配置文件
      */
-    private static void setSenderToPro(Properties properties, User user){
+    private static void setSenderToPro(Properties properties, User user) {
         properties.put("mail.smtp.username", user.account);
-        properties.put("mail.smtp.password",user.password);
+        properties.put("mail.smtp.password", user.password);
     }
 
     /**
@@ -136,7 +137,7 @@ public class EmailRelayerManager {
                 break;
             case Constants.EMAIL_SERVICER_OTHER:
                 String host = dataManager.getEmailHost();
-                if(host!=null){
+                if (host != null) {
                     props.put("mail.smtp.host", host);
                 }
                 break;
@@ -148,13 +149,15 @@ public class EmailRelayerManager {
      * 登录认证
      */
     private static class SmtpAuthenticator extends Authenticator {
-        String mUsername ;
-        String mPassword ;
+        String mUsername;
+        String mPassword;
+
         public SmtpAuthenticator(User user) {
             super();
             this.mUsername = user.account;
             this.mPassword = user.password;
         }
+
         @Override
         public PasswordAuthentication getPasswordAuthentication() {
             if ((mUsername != null) && (mUsername.length() > 0) && (mPassword != null)
@@ -168,10 +171,11 @@ public class EmailRelayerManager {
     /**
      * 发送方账户密码实体类
      */
-    private static class User{
+    private static class User {
         String account;
         String password;
-        User(String account,String password){
+
+        User(String account, String password) {
             this.account = account;
             this.password = password;
         }
@@ -180,7 +184,7 @@ public class EmailRelayerManager {
     /**
      * 封装消息实体
      */
-    private static EmailMessage creatEmailMessage(String content,SharedPreferenceUtil dataManager){
+    private static EmailMessage creatEmailMessage(String content, SharedPreferenceUtil dataManager) {
         EmailMessage message = new EmailMessage();
         message.setContent(content);
         message.setSenderAccount(dataManager.getEmailAccount());

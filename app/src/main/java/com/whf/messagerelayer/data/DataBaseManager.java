@@ -41,13 +41,12 @@ public class DataBaseManager {
 
     /**
      * 添加多条数据
-     *
      */
     public void addContactList(List<Contact> contactList) {
         SQLiteDatabase database = mHelper.getWritableDatabase();
         for (Contact contact : contactList) {
             String num = contact.getContactNum();
-            if (FormatMobile.hasPrefix(num)){
+            if (FormatMobile.hasPrefix(num)) {
                 num = FormatMobile.formatMobile(num);
             }
             ContentValues values = new ContentValues();
@@ -79,7 +78,7 @@ public class DataBaseManager {
      */
     public void deleteContactFromMobile(String mobile) {
         SQLiteDatabase database = mHelper.getWritableDatabase();
-        database.delete(Constants.DB_TABLE_NAME, Constants.DB_KEY_MOBLIE + "= ?" , new String[]{mobile});
+        database.delete(Constants.DB_TABLE_NAME, Constants.DB_KEY_MOBLIE + "= ?", new String[]{mobile});
     }
 
     /**

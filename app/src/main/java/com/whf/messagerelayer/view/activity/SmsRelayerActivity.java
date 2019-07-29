@@ -1,9 +1,6 @@
 package com.whf.messagerelayer.view.activity;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,6 +10,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.utils.SharedPreferenceUtil;
@@ -38,13 +39,13 @@ public class SmsRelayerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void initActionbar(){
+    private void initActionbar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -59,9 +60,9 @@ public class SmsRelayerActivity extends AppCompatActivity
     }
 
     private void initView() {
-        mSmsSwitch = (Switch) findViewById(R.id.switch_sms);
-        mMobileRelative = (RelativeLayout) findViewById(R.id.layout_mobile);
-        mMobileText = (TextView) findViewById(R.id.text_mobile);
+        mSmsSwitch = findViewById(R.id.switch_sms);
+        mMobileRelative = findViewById(R.id.layout_mobile);
+        mMobileText = findViewById(R.id.text_mobile);
     }
 
     private void initData() {
@@ -114,10 +115,10 @@ public class SmsRelayerActivity extends AppCompatActivity
     private void showEditDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
-        final EditText mobileEdit = (EditText) view.findViewById(R.id.dialog_edit);
+        final EditText mobileEdit = view.findViewById(R.id.dialog_edit);
 
         String mobileText = mMobileText.getText().toString();
-        if(!mobileText.equals("点击设置")){
+        if (!mobileText.equals("点击设置")) {
             mobileEdit.setText(mobileText);
         }
 

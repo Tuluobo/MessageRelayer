@@ -2,12 +2,7 @@ package com.whf.messagerelayer.view.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,12 +12,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.whf.messagerelayer.R;
-import com.whf.messagerelayer.view.adapter.ContactSelectedAdapter;
-import com.whf.messagerelayer.view.adapter.decoration.ContactDecoration;
-import com.whf.messagerelayer.data.bean.Contact;
 import com.whf.messagerelayer.data.Constants;
 import com.whf.messagerelayer.data.DataBaseManager;
+import com.whf.messagerelayer.data.bean.Contact;
+import com.whf.messagerelayer.view.adapter.ContactSelectedAdapter;
+import com.whf.messagerelayer.view.adapter.decoration.ContactDecoration;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,9 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_selected_contact);
         initActionbar();
 
-        mSelectedContactList = (RecyclerView) findViewById(R.id.list_selected_contact);
-        mAddContactButton = (Button) findViewById(R.id.button_add_contact);
-        mAddOneContact = (Button) findViewById(R.id.button_add_one);
+        mSelectedContactList = findViewById(R.id.list_selected_contact);
+        mAddContactButton = findViewById(R.id.button_add_contact);
+        mAddOneContact = findViewById(R.id.button_add_one);
 
         mAddContactButton.setOnClickListener(this);
         mAddOneContact.setOnClickListener(this);
@@ -50,7 +51,7 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if(intent.getBooleanExtra(Constants.EXTRA_DATA_CHANGE,false)){
+        if (intent.getBooleanExtra(Constants.EXTRA_DATA_CHANGE, false)) {
             mContactAdapter.notifyUpdata(getContactList());
         }
         super.onNewIntent(intent);
@@ -58,13 +59,13 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void initActionbar(){
+    private void initActionbar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -75,7 +76,7 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
      */
     private void initRecyclerView() {
         mSelectedContactList.addItemDecoration(new ContactDecoration());
-        mSelectedContactList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mSelectedContactList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         ArrayList<Contact> selectedList = getContactList();
         mContactAdapter = new ContactSelectedAdapter(this, selectedList);
@@ -106,9 +107,9 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
     private void showAddOneDialog() {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.dialog_email_account, null, false);
-        final EditText textName = (EditText) view.findViewById(R.id.editText_account);
-        final EditText textNum = (EditText) view.findViewById(R.id.editText_password);
-        TextView title = (TextView) view.findViewById(R.id.dialog_title);
+        final EditText textName = view.findViewById(R.id.editText_account);
+        final EditText textNum = view.findViewById(R.id.editText_password);
+        TextView title = view.findViewById(R.id.dialog_title);
 
         textName.setHint("名称");
         textNum.setHint("电话号");
@@ -132,12 +133,12 @@ public class SelectedContactActivity extends AppCompatActivity implements View.O
                 String num = textNum.getText().toString();
                 if (name.length() != 0 && num.length() != 0) {
                     DataBaseManager dataBaseManager = new DataBaseManager(SelectedContactActivity.this);
-                    Contact contact = new Contact(name,num);
+                    Contact contact = new Contact(name, num);
                     dataBaseManager.addContact(contact);
                     dataBaseManager.closeHelper();
                     mContactAdapter.notifyUpdata(getContactList());
-                }else{
-                    Toast.makeText(SelectedContactActivity.this,"名称或手机号不能为空",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(SelectedContactActivity.this, "名称或手机号不能为空", Toast.LENGTH_LONG).show();
                 }
             }
         });

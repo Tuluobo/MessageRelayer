@@ -1,7 +1,6 @@
 package com.whf.messagerelayer.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,8 +8,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
 import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.utils.SharedPreferenceUtil;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Boolean receiver = mSharedPreferenceUtil.getReceiver();
-                if(receiver){
+                if (receiver) {
                     mSharedPreferenceUtil.setReceiver(false);
                     menuItem.setIcon(R.mipmap.ic_send_off);
-                    Toast.makeText(MainActivity.this,"总闸已关闭",Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(MainActivity.this, "总闸已关闭", Toast.LENGTH_SHORT).show();
+                } else {
                     mSharedPreferenceUtil.setReceiver(true);
                     menuItem.setIcon(R.mipmap.ic_send_on);
-                    Toast.makeText(MainActivity.this,"总闸已开启",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "总闸已开启", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        startActivity(new Intent(MainActivity.this,AboutActivity.class));
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
                         return false;
                     }
                 }).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -66,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        mSmsLayout = (RelativeLayout) findViewById(R.id.sms_relay_layout);
-        mEmailLayout = (RelativeLayout) findViewById(R.id.email_relay_layout);
-        mRuleLayout = (RelativeLayout) findViewById(R.id.rule_layout);
+        mSmsLayout = findViewById(R.id.sms_relay_layout);
+        mEmailLayout = findViewById(R.id.email_relay_layout);
+        mRuleLayout = findViewById(R.id.rule_layout);
 
         mSmsLayout.setOnClickListener(this);
         mEmailLayout.setOnClickListener(this);
@@ -88,4 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, RuleActivity.class));
         }
     }
+
+
+
 }

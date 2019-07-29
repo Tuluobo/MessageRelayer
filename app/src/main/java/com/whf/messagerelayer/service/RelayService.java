@@ -4,12 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
-import com.whf.messagerelayer.data.bean.Contact;
 import com.whf.messagerelayer.data.Constants;
+import com.whf.messagerelayer.data.DataBaseManager;
+import com.whf.messagerelayer.data.bean.Contact;
 import com.whf.messagerelayer.utils.EmailRelayerManager;
 import com.whf.messagerelayer.utils.SharedPreferenceUtil;
 import com.whf.messagerelayer.utils.SmsRelayerManager;
-import com.whf.messagerelayer.data.DataBaseManager;
 
 import java.util.ArrayList;
 import java.util.Set;

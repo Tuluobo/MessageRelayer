@@ -26,7 +26,7 @@ public class Contact {
 
     }
 
-    public Contact( String contactName, String contactNum) {
+    public Contact(String contactName, String contactNum) {
         this.mContactName = contactName;
         this.mContactNum = contactNum;
     }

@@ -22,10 +22,10 @@ public class SharedPreferenceUtil {
         mPreference = context.getSharedPreferences(Constants.SETTING_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    public static SharedPreferenceUtil getInstance(Context context){
-        if (mPreferenceUtil==null){
-            synchronized (SharedPreferenceUtil.class){
-                if (mPreferenceUtil == null){
+    public static SharedPreferenceUtil getInstance(Context context) {
+        if (mPreferenceUtil == null) {
+            synchronized (SharedPreferenceUtil.class) {
+                if (mPreferenceUtil == null) {
                     mPreferenceUtil = new SharedPreferenceUtil(context);
                 }
             }
@@ -137,28 +137,28 @@ public class SharedPreferenceUtil {
         return mPreference.getString(Constants.KEY_EMAIL_SUBJECT, "短信转发");
     }
 
-    public void setKeywordSet(Set<String> values){
-        mPreference.edit().putStringSet(Constants.KEY_KEYWORD_LIST,values).apply();
+    public void setKeywordSet(Set<String> values) {
+        mPreference.edit().putStringSet(Constants.KEY_KEYWORD_LIST, values).apply();
     }
 
-    public Set<String> getKeywordSet(){
-        return mPreference.getStringSet(Constants.KEY_KEYWORD_LIST,new HashSet<String>());
+    public Set<String> getKeywordSet() {
+        return mPreference.getStringSet(Constants.KEY_KEYWORD_LIST, new HashSet<String>());
     }
 
-    public void setContentPrefix(String prefix){
-        mPreference.edit().putString(Constants.KEY_CONTENT_PREFIX,prefix).apply();
+    public void setContentPrefix(String prefix) {
+        mPreference.edit().putString(Constants.KEY_CONTENT_PREFIX, prefix).apply();
     }
 
-    public void setContentSuffix(String suffix){
-        mPreference.edit().putString(Constants.KEY_CONTENT_SUFFIX,suffix).apply();
+    public void setContentSuffix(String suffix) {
+        mPreference.edit().putString(Constants.KEY_CONTENT_SUFFIX, suffix).apply();
     }
 
-    public String getContentSuffix(){
-        return mPreference.getString(Constants.KEY_CONTENT_SUFFIX,null);
+    public String getContentSuffix() {
+        return mPreference.getString(Constants.KEY_CONTENT_SUFFIX, null);
     }
 
-    public String getContentPrefix(){
-        return mPreference.getString(Constants.KEY_CONTENT_PREFIX,null);
+    public String getContentPrefix() {
+        return mPreference.getString(Constants.KEY_CONTENT_PREFIX, null);
     }
 
 }

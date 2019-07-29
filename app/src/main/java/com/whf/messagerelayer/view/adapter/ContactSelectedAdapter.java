@@ -1,15 +1,16 @@
 package com.whf.messagerelayer.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.whf.messagerelayer.R;
-import com.whf.messagerelayer.view.adapter.holder.ContactHolder;
-import com.whf.messagerelayer.data.bean.Contact;
 import com.whf.messagerelayer.data.DataBaseManager;
+import com.whf.messagerelayer.data.bean.Contact;
+import com.whf.messagerelayer.view.adapter.holder.ContactHolder;
 
 import java.util.List;
 
@@ -31,12 +32,12 @@ public class ContactSelectedAdapter extends RecyclerView.Adapter<ContactHolder> 
 
 
     private View getItemView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_selected_contact,parent,false);
+        return inflater.inflate(R.layout.item_selected_contact, parent, false);
     }
 
     @Override
     public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = getItemView(mInflater,parent);
+        View view = getItemView(mInflater, parent);
         ContactHolder holder = new ContactHolder(view);
         return holder;
     }
@@ -66,9 +67,10 @@ public class ContactSelectedAdapter extends RecyclerView.Adapter<ContactHolder> 
 
     /**
      * 外部调用的更新数据
+     *
      * @param contactList
      */
-    public void notifyUpdata(List<Contact> contactList){
+    public void notifyUpdata(List<Contact> contactList) {
         mSelectedList = contactList;
         notifyDataSetChanged();
     }

@@ -1,9 +1,6 @@
 package com.whf.messagerelayer.view.activity;
 
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.whf.messagerelayer.R;
@@ -36,11 +37,11 @@ public class KeywordActivity extends AppCompatActivity {
         mSharedPreferenceUtil = SharedPreferenceUtil.getInstance(this);
         mTextSet = (HashSet<String>) mSharedPreferenceUtil.getKeywordSet();
 
-        this.mFlexboxLayout = (FlexboxLayout) findViewById(R.id.layout_flexbox);
+        this.mFlexboxLayout = findViewById(R.id.layout_flexbox);
         initFlexboxLayout();
     }
 
-    private void initActionbar(){
+    private void initActionbar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -60,7 +61,7 @@ public class KeywordActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -68,9 +69,9 @@ public class KeywordActivity extends AppCompatActivity {
 
     private void showAddDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit,null,false);
-        TextView textView = (TextView) view.findViewById(R.id.dialog_title);
-        final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null, false);
+        TextView textView = view.findViewById(R.id.dialog_title);
+        final EditText editText = view.findViewById(R.id.dialog_edit);
 
         textView.setText("请输入关键字");
         builder.setView(view);
@@ -78,13 +79,13 @@ public class KeywordActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String keyword = editText.getText().toString();
-                if(keyword.length()!=0){
+                if (keyword.length() != 0) {
                     Set<String> set = new HashSet<>(mSharedPreferenceUtil.getKeywordSet());
-                    mFlexboxLayout.addView(createItemView(keyword,set.size()));
+                    mFlexboxLayout.addView(createItemView(keyword, set.size()));
                     set.add(keyword);
                     mSharedPreferenceUtil.setKeywordSet(set);
-                }else{
-                    Toast.makeText(KeywordActivity.this,"请输入有效字符",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(KeywordActivity.this, "请输入有效字符", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -100,14 +101,14 @@ public class KeywordActivity extends AppCompatActivity {
 
     private void initFlexboxLayout() {
         int i = 0;
-        for (String keyword:mTextSet) {
-            mFlexboxLayout.addView(createItemView(keyword,i++));
+        for (String keyword : mTextSet) {
+            mFlexboxLayout.addView(createItemView(keyword, i++));
         }
     }
 
     private View createItemView(String text, int index) {
-        View view =  LayoutInflater.from(this).inflate(R.layout.item_keyword,null,false);
-        TextView textView = (TextView) view.findViewById(R.id.text_keyword);
+        View view = LayoutInflater.from(this).inflate(R.layout.item_keyword, null, false);
+        TextView textView = view.findViewById(R.id.text_keyword);
         textView.setText(text);
         initBackground(textView, index);
         textView.setCompoundDrawablesWithIntrinsicBounds(null, null
@@ -136,7 +137,7 @@ public class KeywordActivity extends AppCompatActivity {
     /**
      * 点击删除其View
      */
-    public void removeClick(View view){
+    public void removeClick(View view) {
         TextView textView = (TextView) view;
         String keyword = textView.getText().toString();
         Set<String> set = new HashSet<>(mSharedPreferenceUtil.getKeywordSet());

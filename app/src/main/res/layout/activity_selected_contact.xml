@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.whf.messagerelayer.view.activity.SelectedContactActivity">
-    <android.support.v7.widget.RecyclerView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_selected_contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button_add_one">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_above="@+id/button_add_one"/>
     <Button
         android:id="@+id/button_add_one"
         android:layout_width="match_parent"
